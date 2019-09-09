@@ -1,0 +1,35 @@
+- name: Install git
+  yum: name=git  
+
+- name: download get-pip.py
+  get_url: url=https://bootstrap.pypa.io/get-pip.py  dest=/tmp
+
+- name: install pip
+  command: "python /tmp/get-pip.py"
+
+- name: Install boto
+  command: pip install boto
+
+- name: Install ansibe
+  command: pip install ansible
+
+- name: "Copy github id_rsa to .ssh path"
+  copy: src="id_rsa" dest=/root/.ssh/id_rsa owner=root group=root mode=0400
+
+- name: "ssh config to agent"
+  copy: src="config" dest=/root/.ssh/config owner=root group=root mode=0400
+
+- name: ".bashrc config"
+  copy: src=".bashrc" dest=/root/.bashrc owner=root group=root  
+
+- name: clean up work space
+  file:
+    path: /root/infra-problem
+    state: absent
+
+- name: "Git clone infra-problem"
+  git:
+    repo: "{{ gateway.git_repo }}"
+    dest: /root/infra-problem
+    accept_hostkey: yes
+    key_file: /root/.ssh/id_rsa

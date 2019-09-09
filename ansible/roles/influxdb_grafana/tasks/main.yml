@@ -1,0 +1,25 @@
+- name: Install docker
+  yum: name=docker
+
+- name: download get-pip.py
+  get_url: url=https://bootstrap.pypa.io/get-pip.py  dest=/tmp
+
+- name: install pip
+  command: python /tmp/get-pip.py
+
+- name: update pip
+  command: pip install --upgrade --force-reinstall pip==9.0.3
+
+- name: Install docker-compose
+  command: pip install docker-compose
+
+- name: Ensure docker deamon is running
+  service:
+    name: docker
+    state: started
+
+- name: Copy docker compose to agent
+  copy: src="docker-compose.yml" dest=/home/ec2-user/docker-compose.yml owner=root group=root
+
+- name: start influx and grafana
+  command: docker-compose up -d

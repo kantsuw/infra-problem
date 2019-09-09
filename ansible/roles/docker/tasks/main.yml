@@ -1,0 +1,25 @@
+- name: Install git
+  yum: name=git  
+
+- name: Pause for a while
+  pause: seconds=20  
+
+- name: Install docker
+  yum: name=docker
+
+- name: Ensure docker deamon is running
+  service:
+    name: docker
+    state: started
+
+- name: "Copy github id_rsa to .ssh path"
+  copy: src="id_rsa" dest=/root/.ssh/id_rsa owner=root group=root mode=0400
+
+- name: "ssh config to agent"
+  copy: src="config" dest=/root/.ssh/config owner=root group=root mode=0400
+
+- name: Restart service docker 
+  service:
+    name: docker
+    state: restarted
+

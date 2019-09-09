@@ -1,0 +1,6 @@
+- hosts: tag_application_quotes-beta
+  remote_user: ec2-user
+  become: yes
+  become_method: sudo
+  roles:
+    - quotes-new-version
