@@ -144,7 +144,8 @@ resource "aws_instance" "gateway-beta" {
   count = "1"
 
   tags = {
-    application  = "gateway-beta"
+    application  = "gateway"
+    env = "beta"
   }
 
   instance_type = "t2.micro"
@@ -160,7 +161,8 @@ resource "aws_instance" "influxdb_grafana-beta" {
   }
 
   tags = {
-    application  = "influxdb_grafana-beta"
+    application  = "influxdb_grafana"
+    env = "beta"
   }
 
   count = "1"
@@ -178,7 +180,8 @@ resource "aws_instance" "front-end-beta" {
   }
 
   tags = {
-    application  = "front-end-beta"
+    application  = "front-end"
+    env = "beta"
   }
 
   count = "1"
@@ -196,7 +199,8 @@ resource "aws_instance" "newsfeed-beta" {
   }
   
   tags = {
-    application  = "newsfeed-beta"
+    application  = "newsfeed"
+    env = "beta"
   }
 
   count = "1"
@@ -214,7 +218,8 @@ resource "aws_instance" "quotes-beta" {
   }
 
   tags = {
-    application  = "quotes-beta"
+    application  = "quotes"
+    env = "beta"
   }
 
   count = "1"

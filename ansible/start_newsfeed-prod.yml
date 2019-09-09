@@ -1,4 +1,4 @@
-- hosts: tag_application_newsfeed-prod
+- hosts: tag_application_newsfeed:&tag_env_prod
   remote_user: ec2-user
   become: yes
   become_method: sudo

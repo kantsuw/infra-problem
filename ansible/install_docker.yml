@@ -1,4 +1,4 @@
-- hosts: tag_application
+- hosts: tag_application_front-end:tag_application_newsfeed:tag_application_quotes
   remote_user: ec2-user
   become: yes
   become_method: sudo

@@ -145,6 +145,7 @@ resource "aws_instance" "gateway" {
 
   tags = {
     application  = "gateway"
+    env  = "prod"
   }
 
   instance_type = "t2.micro"
@@ -161,6 +162,7 @@ resource "aws_instance" "influxdb_grafana" {
 
   tags = {
     application  = "influxdb_grafana"
+    env  = "prod"
   }
 
   count = "1"
@@ -179,6 +181,7 @@ resource "aws_instance" "front-end" {
 
   tags = {
     application  = "front-end"
+    env  = "prod"
   }
 
   count = "1"
@@ -197,6 +200,7 @@ resource "aws_instance" "newsfeed" {
   
   tags = {
     application  = "newsfeed"
+    env  = "prod"
   }
 
   count = "1"
@@ -215,6 +219,7 @@ resource "aws_instance" "quotes" {
 
   tags = {
     application  = "quotes"
+    env  = "prod"
   }
 
   count = "1"

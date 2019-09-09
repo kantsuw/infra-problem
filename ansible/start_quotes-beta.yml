@@ -1,4 +1,4 @@
-- hosts: tag_application_quotes-beta
+- hosts: tag_application_quotes:&tag_env_beta
   remote_user: ec2-user
   become: yes
   become_method: sudo
