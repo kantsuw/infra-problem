@@ -1,20 +1,41 @@
-- name: "Add yum repository"
-  yum_repository:
-    name: influxdb
-    description: InfluxDB Repository - RHEL
-    baseurl: https://repos.influxdata.com/rhel/7/x86_64/stable/
-    gpgcheck: yes
-    gpgkey: https://repos.influxdata.com/influxdb.key
+- name: "Git clone infra-problem"
+  git:
+    repo: "{{ git_repo }}"
+    dest: /root/infra-problem
+    accept_hostkey: yes
+    key_file: /root/.ssh/id_rsa
 
-- name: Install telegraf
-  yum: name=telegraf
+- name: "Build static_assets image"
+  docker_image:
+    build:
+      path: ./Dockerfile.static_assets
+    name: static_assets
+    tag: latest
+    push: 
+    source: build  
 
-- name: copy config
-  template:
-    src: telegraf.conf
-    dest: "/etc/telegraf/telegraf.conf"
+- name: "Build front-end image"
+  docker_image:
+    build:
+      path: ./Dockerfile.front-end
+    name: front-end
+    tag: latest
+    push:
+    source: build
 
-- name: Restart Telegraf
+- name: Restart service docker 
   service:
-    name: telegraf
+    name: docker
     state: restarted
+
+- name: Start static_assets
+  docker_container:
+    image: static_assets
+    exposed_ports:  
+      - 8000
+
+- name: Start front-end
+  docker_container:
+    image: front-end
+    exposed_ports:
+      - 7878

@@ -1,0 +1,20 @@
+FROM clojure
+
+WORKDIR /etc/apps/
+
+ADD . .
+
+RUN apt-get update \
+  && apt-get install -y python3-pip python3-dev \
+  && cd /usr/local/bin \
+  && ln -s /usr/bin/python3 python \
+  && pip3 install --upgrade pip
+
+RUN make libs
+
+RUN make clean all
+
+ENV APP_PORT 8000
+
+CMD ["java -jar build/newsfeed.jar"]
+

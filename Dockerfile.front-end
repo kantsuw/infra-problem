@@ -1,0 +1,27 @@
+FROM clojure
+
+WORKDIR /etc/apps/
+
+ADD . .
+
+RUN apt-get update \
+  && apt-get install -y python3-pip python3-dev \
+  && cd /usr/local/bin \
+  && ln -s /usr/bin/python3 python \
+  && pip3 install --upgrade pip
+
+RUN make libs
+
+RUN make clean all
+
+ENV APP_PORT 7878
+
+ENV STATIC_URL 172.0.0.1:8000
+
+ENV QUOTE_SERVICE_URL a
+
+ENV NEWSFEED_SERVICE_URL a
+
+ENV NEWSFEED_SERVICE_TOKEN 'T1&eWbYXNWG1w1^YGKDPxAWJ@^et^&kX'
+
+CMD [ "java -jar build/front-end.jar"]

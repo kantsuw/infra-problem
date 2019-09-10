@@ -10,11 +10,4 @@ RUN apt-get update \
   && ln -s /usr/bin/python3 python \
   && pip3 install --upgrade pip
 
-RUN make libs
-
-RUN make clean all
-
-ENV APP_PORT 8000
-
-CMD ["java -jar build/quotes.jar"]
-
+CMD ["./front-end/public/serve.py"]
