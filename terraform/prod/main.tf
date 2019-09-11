@@ -1,8 +1,8 @@
 provider "aws" {
   profile = "default"
   region  = "ap-southeast-1"
-  access_key = "AKIAUDQF6UHOABZR6D77"
-  secret_key = "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"
+  access_key = ""
+  secret_key = ""
 }
 
 resource "aws_security_group" "gateway-prod" {
