@@ -54,6 +54,6 @@ stack_filters = False
 # Unlike the boto and AWS configure files, this section does not support
 # profiles.
 #
-aws_access_key_id = AKIAISHJF3S2WDZ3BXOQ
-aws_secret_access_key = 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
+aws_access_key_id = 
+aws_secret_access_key = 
 
